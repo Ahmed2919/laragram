@@ -28,7 +28,7 @@ class UserFactory extends Factory
             'name' => $name,
             'username' => fake()->userName(),
             'bio' => fake()->sentence(),
-            'image' => 'https://ui-avatars.com/api/?name=John+Doe' . urlencode($name),
+            'image' => 'https://ui-avatars.com/api/?name=' . urlencode($name),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),

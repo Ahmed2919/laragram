@@ -3,7 +3,7 @@
 
         {{-- Left Side --}}
         <div class="flex h-full items-center overflow-hidden bg-black md:w-7/12">
-            <img src="/storage/{{$post->image}}" alt="{{$post->description}}" class="max-h-screen object-cover mx-auto"/>
+            <img src="{{asset('storage/'.$post->image)}}" alt="{{$post->description}}" class="max-h-screen object-cover mx-auto"/>
         </div>
 
         {{-- Right Side --}}
@@ -17,6 +17,18 @@
                     <div class="grow">
                         <a href="/{{ $post->owner->username }}" class="font-bold">{{ $post->owner->username }}</a>
                     </div>
+                    @if($post->owner->id === auth()->id())
+                        <a href="{{$post->slug}}/edit"><i class="bx bx-message-square-edit text-xl"></i></a>
+                        <form action="/p/{{ $post->slug }}/delete" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" onclick="return confirm('Are you sure?')">
+                                <i class='bx bx-message-square-x ltr:ml-2 rtl:mr-2 text-xl text-red-600'></i>
+                            </button>
+                        </form>
+                    
+                    @endif
+                    
 
                
                 </div>
