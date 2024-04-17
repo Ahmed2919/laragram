@@ -11,11 +11,7 @@
                 </div>
 
                 <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('home_page')" :active="request()->routeIs('home_page')">
-                        {{ __('Dashboard') }}
-                    </x-nav-link>
-                </div>
+                
             </div>
 
             <!-- Settings Dropdown -->
@@ -48,7 +44,7 @@
                 <x-dropdown align="right" width="48">
             
                     <x-slot name="trigger">
-                            <div>
+                            <div class="ml-4">
                                 <img src="{{Auth::user()->image }}" class="rounded-full w-6 h-6"/>
                             </div>
 
@@ -56,7 +52,7 @@
                     </x-slot>
 
                     <x-slot name="content">
-                        <x-dropdown-link :href="route('profile.edit')">
+                        <x-dropdown-link :href="route('user_profile' , ['user' => auth()->user()])">
                             {{ __('Profile') }}
                         </x-dropdown-link>
 

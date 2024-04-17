@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\CommentController;
-use App\Http\Controllers\PostController;
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,14 +17,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+require __DIR__ . '/auth.php';
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/explore', [PostController::class, 'explore'])->name('explore');
 
+Route::get('/explore', [PostController::class, 'explore'])->name('explore');
+Route::get('/{user:username}', [UserController::class, 'index'])->name('user_profile')->middleware('auth');
 //posts
 Route::controller(PostController::class)->middleware('auth')->group(function () {
     Route::get('/', 'index')->name('home_page');
@@ -37,5 +41,3 @@ Route::controller(PostController::class)->middleware('auth')->group(function () 
 
 //comments
 Route::post('/p/{post:slug}/comment', [CommentController::class, 'store'])->name('comment.store')->middleware('auth');
-
-require __DIR__ . '/auth.php';
