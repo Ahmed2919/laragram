@@ -28,6 +28,9 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/explore', [PostController::class, 'explore'])->name('explore');
 Route::get('/{user:username}', [UserController::class, 'index'])->name('user_profile')->middleware('auth');
+Route::get('/{user:username}/edit', [UserController::class, 'edit'])->name('edit_profile')->middleware('auth');
+Route::patch('/{user:username}/update', [UserController::class, 'update'])->name('update_profile')->middleware('auth');
+
 //posts
 Route::controller(PostController::class)->middleware('auth')->group(function () {
     Route::get('/', 'index')->name('home_page');

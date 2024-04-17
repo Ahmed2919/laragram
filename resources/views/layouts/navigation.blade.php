@@ -45,7 +45,7 @@
             
                     <x-slot name="trigger">
                             <div class="ml-4">
-                                <img src="{{Auth::user()->image }}" class="rounded-full w-6 h-6"/>
+                                <img src="{{asset('storage/'.Auth::user()->image) }}" class="rounded-full w-6 h-6"/>
                             </div>
 
                            
