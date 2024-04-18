@@ -49,3 +49,7 @@ Route::post('/p/{post:slug}/comment', [CommentController::class, 'store'])->name
 
 //likes
 Route::get('/p/{post:slug}/like', LikeController::class)->middleware('auth');
+
+
+Route::get('/{user:username}/follow', [UserController::class, 'follow'])->middleware('auth');
+Route::get('/{user:username}/unfollow', [UserController::class, 'unfollow'])->middleware('auth');

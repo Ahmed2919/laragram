@@ -15,7 +15,7 @@
         <div class="hidden w-[60rem] lg:flex lg:flex-col pt-4">
             <div class="flex flex-row text-sm">
                 <div class="mr-5">
-                    <img src="{{ auth()->user()->image}}" class="border boreder-gray-500 w-12 h-12 mr-3 rounded-full" />
+                    <img src="{{ asset('storage/'.auth()->user()->image)}}" class="border boreder-gray-500 w-12 h-12 mr-3 rounded-full" />
                 </div>
                 <div class="flex flex-col">
                     <a href="/{{ auth()->user()->username }}" class="font-bold">
@@ -37,9 +37,20 @@
                             </div>
 
                             <div class="flex flex-col grow">
-                                <a href="/{{$suggested_user->username}}" class="font-bold">{{$suggested_user->username}}</a>
+                                <a href="/{{$suggested_user->username}}" class="font-bold">
+                                    {{$suggested_user->username}}
+                                    @if (auth()->user()->is_follower($suggested_user))
+                                        <span class="text-xs text-gray-500 ">{{__('Follwer')}}</span>
+                                    @endif
+                                </a>
                                 <div class="text-gray-500 text-sm">{{$suggested_user->name}}</div>
                             </div>
+                            @if (auth()->user()->is_pending($suggested_user))
+                                <span class="text-gray-500 font-bold">{{__('Pending')}}</span>
+                            @else
+                                <a href="/{{$suggested_user->username}}/follow" class="text-blue-500 font-bold">{{__('Follow')}}</a>
+                            @endif
+
                         </li>
                     @endforeach
                 </ul>
