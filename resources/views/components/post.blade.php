@@ -9,7 +9,15 @@
         <div class="max-h-[35rem] overflow-hidden">
             <img class="h-auto w-full object-cover" src="{{ asset('storage/'.$post->image) }}">
         </div>
-
+        <div class="p-3">
+            <a href="/p/{{$post->slug}}/like">
+                @if ($post->liked(auth()->user()))
+                    <i class="bx bxs-heart text-red-600 text-3xl hover:text-gray-400 cursor-pointer mr-3"></i>
+                @else
+                    <i class="bx bx-heart text-3xl hover:text-gray-400 cursor-pointer mr-3"></i>
+                @endif
+            </a>
+        </div>
       
 
         <div class="p-3">
