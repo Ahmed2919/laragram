@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
@@ -60,6 +61,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
+        Gate::authorize('update', $post);
         return view('posts.edit', compact('post'));
     }
 
@@ -68,6 +70,8 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
+        Gate::authorize('update', $post);
+
         $data = $request->validate([
             'description' => 'required',
             'image' => ['nullable', 'mimes:jpeg,jpg,png']
@@ -86,6 +90,8 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
+        Gate::authorize('delete', $post);
+
         Storage::delete('public/' . $post->image);
 
         $post->delete();

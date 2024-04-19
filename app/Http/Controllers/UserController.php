@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\UpdateUserProfileRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\UpdateUserProfileRequest;
 
 class UserController extends Controller
 {
@@ -16,6 +17,9 @@ class UserController extends Controller
 
     public function edit(User $user)
     {
+        //abort_if(auth()->user()->cannot('edit-update-profile', $user), 403);
+        Gate::authorize('edit-update-profile', $user);
+
         return view('users.edit', compact('user'));
     }
 

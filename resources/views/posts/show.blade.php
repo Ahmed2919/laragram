@@ -17,7 +17,7 @@
                     <div class="grow">
                         <a href="/{{ $post->owner->username }}" class="font-bold">{{ $post->owner->username }}</a>
                     </div>
-                    @if($post->owner->id === auth()->id())
+                    @can('update', $post)
                         <a href="{{$post->slug}}/edit"><i class="bx bx-message-square-edit text-xl"></i></a>
                         <form action="/p/{{ $post->slug }}/delete" method="POST">
                             @csrf
@@ -26,15 +26,21 @@
                                 <i class='bx bx-message-square-x ltr:ml-2 rtl:mr-2 text-xl text-red-600'></i>
                             </button>
                         </form>
-                    @elseif(auth()->user()->is_following($post->owner))
-                        <a href="/{{$post->owner->username}}/unfollow" class="w-30 text-blue-500 text-sm px-3 font-bold text-center ">
-                            {{__('UnFollow')}}
-                        </a>
-                    @else
-                        <a href="/{{$post->owner->username}}/follow" class="w-30 text-blue-500 text-sm px-3 font-bold text-center ">
-                            {{__('Follow')}}
-                        </a>    
-                    @endif
+                    @endcan
+                    
+                    @cannot('update', $post)
+                        @if(auth()->user()->is_following($post->owner))
+                            <a href="/{{$post->owner->username}}/unfollow" class="w-30 text-blue-500 text-sm px-3 font-bold text-center ">
+                                {{__('UnFollow')}}
+                            </a>
+                        @else
+                            <a href="/{{$post->owner->username}}/follow" class="w-30 text-blue-500 text-sm px-3 font-bold text-center ">
+                                {{__('Follow')}}
+                            </a>    
+                        @endif
+                        
+                    @endcannot
+
                     
 
                

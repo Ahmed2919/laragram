@@ -25,24 +25,32 @@
         <div class="px-4 col-span-2 md:ml-0 flex flex-col md:flex-row items-center order-2 md:col-span-3">
             <div class="text-3xl mb-3 ">{{ $user->username }}</div>
                 <div class="ml-3 my-12">
-                    @if ($user->id === auth()->id())
-                        <a href="/{{ $user->username }}/edit"
-                        class="w-50 h-8 self-start border text-sm font-bold py-1 px-5 rounded-md border-neutral-300 text-center">
-                            {{ __('Edit Profile') }}
-                        </a>
-                    @elseif(auth()->user()->is_following($user))
-                        <a href="/{{$user->username}}/unfollow" class="w-30 bg-blue-500 text-white px-3 py-1 rounded text-center self-start">
-                            {{__('UnFollow')}}
-                        </a>
-                    @elseif(auth()->user()->is_pending($user))
-                        <span class="w-30 bg-gray-500 text-white px-3 py-1 rounded text-center self-start">
-                            {{__('pending')}}
-                        </span>
-                    @else
+                    @auth
+                        @if ($user->id === auth()->id())
+                            <a href="/{{ $user->username }}/edit"
+                            class="w-50 h-8 self-start border text-sm font-bold py-1 px-5 rounded-md border-neutral-300 text-center">
+                                {{ __('Edit Profile') }}
+                            </a>
+                        @elseif(auth()->user()->is_following($user))
+                            <a href="/{{$user->username}}/unfollow" class="w-30 bg-blue-500 text-white px-3 py-1 rounded text-center self-start">
+                                {{__('UnFollow')}}
+                            </a>
+                        @elseif(auth()->user()->is_pending($user))
+                            <span class="w-30 bg-gray-500 text-white px-3 py-1 rounded text-center self-start">
+                                {{__('pending')}}
+                            </span>
+                        @else
+                            <a href="/{{$user->username}}/follow" class="w-30 bg-blue-500 text-white px-3 py-1 rounded text-center self-start">
+                                {{__('Follow')}}
+                            </a>
+                        @endif
+                    @endauth
+                    
+                    @guest
                         <a href="/{{$user->username}}/follow" class="w-30 bg-blue-500 text-white px-3 py-1 rounded text-center self-start">
                             {{__('Follow')}}
                         </a>
-                    @endif
+                    @endguest
                 </div>
            
         </div>
@@ -88,7 +96,9 @@
     </div>
 
     {{-- Bottom --}}
-    @if ($user->posts()->count() > 0 and ($user->private_account == false or auth()->id() == $user->id or auth()->user()->is_following($user)))
+    @if ($user->posts()->count() > 0 and ($user->private_account == false or auth()->id() == $user->id))
+
+  {{--  @if ($user->posts()->count() > 0 and ($user->private_account == false or auth()->id() == $user->id or auth()->user()->is_following($user)))--}}
         <div class="grid grid-cols-3 gap-1 my-5">
             @foreach ($user->posts as $post)
                 <a href="/p/{{$post->slug}}" class="aspect-square block w-full">
