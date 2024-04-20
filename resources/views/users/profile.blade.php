@@ -31,19 +31,9 @@
                             class="w-50 h-8 self-start border text-sm font-bold py-1 px-5 rounded-md border-neutral-300 text-center">
                                 {{ __('Edit Profile') }}
                             </a>
-                        @elseif(auth()->user()->is_following($user))
-                            <a href="/{{$user->username}}/unfollow" class="w-30 bg-blue-500 text-white px-3 py-1 rounded text-center self-start">
-                                {{__('UnFollow')}}
-                            </a>
-                        @elseif(auth()->user()->is_pending($user))
-                            <span class="w-30 bg-gray-500 text-white px-3 py-1 rounded text-center self-start">
-                                {{__('pending')}}
-                            </span>
-                        @else
-                            <a href="/{{$user->username}}/follow" class="w-30 bg-blue-500 text-white px-3 py-1 rounded text-center self-start">
-                                {{__('Follow')}}
-                            </a>
                         @endif
+
+                        @livewire('follow', ['userId'=> $user->id , 'classes' => 'bg-blue-500 text-white'])
                     @endauth
                     
                     @guest
