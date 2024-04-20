@@ -75,6 +75,16 @@
                     @endforeach
                 </div>
                 
+                <div class="p-3 border-t flex flex-row">
+                    @livewire('like' , ['post' => $post]) {{--//, ['user' => $user], key($user->id))--}}
+        
+                    <a class="grow" onclick="document.getElementById('comment_body').focus()">
+                        <i class="bx bx-comment text-3xl hover:text-gray-400 cursor-point mr-3"></i>
+                    </a>
+
+                </div>
+                @livewire('liked-by', ['post' => $post])
+
                 <div class="border-t p-5">
                     <form action="/p/{{ $post->slug }}/comment" method="POST">
                         @csrf
