@@ -31,9 +31,10 @@
                             class="w-50 h-8 self-start border text-sm font-bold py-1 px-5 rounded-md border-neutral-300 text-center">
                                 {{ __('Edit Profile') }}
                             </a>
+                        @else
+                            @livewire('follow-button', ['userId'=> $user->id , 'classes' => 'bg-blue-500 text-white'])
                         @endif
 
-                        @livewire('follow', ['userId'=> $user->id , 'classes' => 'bg-blue-500 text-white'])
                     @endauth
                     
                     @guest
@@ -63,23 +64,9 @@
                         {{ $user->posts->count() > 1 ? __('posts') : __('post') }}
                     </span>
                 </li>
-                <li class="flex flex-col md:flex-row text-center ">
-                    <div class=" font-bold md:font-normal mr-2">
-                        {{ $user->followers()->count() }}
-                    </div>
-                    <span class='text-neutral-500 md:text-black'>
-                        {{ $user->followers->count() > 1 ? __('Followers') : __('Follower') }}
-                    </span>
-                </li>
+                @livewire('follower', ['userId' => $user->id])
 
-                <li class="flex flex-col md:flex-row text-center ">
-                    <div class=" font-bold md:font-normal mr-2">
-                        {{ $user->following()->wherePivot('confirmed' , true)->count() }}
-                    </div>
-                    <span class='text-neutral-500 md:text-black'>
-                        {{  __('Following') }}
-                    </span>
-                </li>
+                @livewire('following', ['userId' => $user->id])
 
             </ul>
         </div>
