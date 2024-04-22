@@ -7,7 +7,7 @@
     </div>
     <div class="card-body">
         <div class="max-h-[35rem] overflow-hidden">
-            <img class="h-auto w-full object-cover" src="{{ asset('storage/'.$post->image) }}">
+            <img class="h-auto w-full object-cover" src="{{ asset($post->image) }}">
         </div>
         <div class="p-3 flex flex-row">
             @livewire('like' , ['post' => $post]); {{--//, ['user' => $user], key($user->id))--}}
