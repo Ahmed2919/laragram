@@ -7,7 +7,7 @@
     <div class="grid grid-cols-4 ">
         {{-- User Image --}}
         <div class="px-4 col-span-1 order-1">
-            <img src="{{asset('storage/'.$user->image)  }}" alt="{{ $user->username }}' profile picture"
+            <img src="{{ $user->getImage()  }}" alt="{{ $user->username }}' profile picture"
                  class="rounded-full w-20 h-20 object-cover md:w-40 md:h-40 border border-neutral-300">
         </div>
 

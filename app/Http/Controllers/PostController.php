@@ -96,7 +96,7 @@ class PostController extends Controller
 
         $post->delete();
 
-        return redirect(url('home'));
+        return redirect(route('user_profile', ['user' => auth()->user()]));
     }
 
     public function explore()

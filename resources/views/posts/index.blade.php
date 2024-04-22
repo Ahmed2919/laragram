@@ -8,7 +8,7 @@
         <div class="hidden w-[60rem] lg:flex lg:flex-col pt-4">
             <div class="flex flex-row text-sm">
                 <div class="mr-5">
-                    <img src="{{ asset('storage/'.auth()->user()->image)}}" class="border boreder-gray-500 w-12 h-12 mr-3 rounded-full" />
+                    <img src="{{ auth()->user()->getImage() }}" class="border boreder-gray-500 w-12 h-12 mr-3 rounded-full" />
                 </div>
                 <div class="flex flex-col">
                     <a href="/{{ auth()->user()->username }}" class="font-bold">
@@ -25,7 +25,7 @@
                         <li class="flex flex-row my-5 text-sm justify-items-center">
                             <div class="mr-5">
                                 <a href="/{{$suggested_user->username}}">
-                                    <img src="{{$suggested_user->image}}" class="rounded-full h-9 w-9 border border-gray-500"/>
+                                    <img src="{{$suggested_user->getImage()}}" class="rounded-full h-9 w-9 border border-gray-500"/>
                                 </a>
                             </div>
 

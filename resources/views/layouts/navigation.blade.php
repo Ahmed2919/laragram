@@ -41,12 +41,15 @@
                                     :'<i class="bx bx-compass"></i>'
                                 !!}
                             </a>
-                            <a href="{{route('post.create')}}">
+                           {{-- <a href="{{route('post.create')}}">
                                 {!! url()->current() == route('post.create')
                                     ?'<i class="bx bxs-message-square-add"></i>'
                                     :'<i class="bx bx-message-square-add"></i>'
                                 !!}
-                            </a>
+                            </a>--}}
+                            <button onclick="Livewire.dispatch('openModal', { component: 'create-post-modal'})">
+                                <i class="bx bx-message-square-add"></i>
+                            </button>
                         </div>
                         <x-dropdown align="right" width="96">
                         
@@ -72,7 +75,7 @@
                         
                                 <x-slot name="trigger">
                                         <div class="ml-4">
-                                            <img src="{{asset('storage/'.auth()->user()->image) }}" class="rounded-full w-10 h-10 cursor-pointer"/>
+                                            <img src="{{ auth()->user()->getImage() }}" class="rounded-full w-10 h-10 cursor-pointer"/>
                                         </div>
 
                                     
@@ -120,7 +123,7 @@
                 {{ __('Home') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('explore')">{{ __('Explore') }}</x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('post.create')">{{ __('New Post') }}</x-responsive-nav-link>
+            <x-responsive-nav-link class="cursor-pointer" onclick="Livewire.dispatch('openModal', { component: 'create-post-modal'})">{{ __('New Post') }}</x-responsive-nav-link>
 
         </div>
 

@@ -12,13 +12,16 @@
             {{-- Top --}}
             <div class="border-b-2">
                 <div class="flex items-center p-5">
-                    <img src="{{ $post->owner->image }}" alt="{{ $post->owner->username }}"
+                    <img src="{{ $post->owner->getImage() }}" alt="{{ $post->owner->username }}"
                          class="ltr:mr-5 rtl:ml-5 h-10 w-10 rounded-full">
                     <div class="grow">
                         <a href="/{{ $post->owner->username }}" class="font-bold">{{ $post->owner->username }}</a>
                     </div>
                     @can('update', $post)
-                        <a href="{{$post->slug}}/edit"><i class="bx bx-message-square-edit text-xl"></i></a>
+                        {{-- <a href="{{$post->slug}}/edit"><i class="bx bx-message-square-edit text-xl"></i></a> --}}
+                        <button onclick="Livewire.dispatch('openModal', { component: 'edit-post-modal', arguments: { post: {{ $post }} }})">
+                            <i class="bx bx-message-square-edit text-xl"></i>
+                        </button>
                         <form action="/p/{{ $post->slug }}/delete" method="POST">
                             @csrf
                             @method('DELETE')
@@ -42,7 +45,7 @@
             {{-- Middle --}}
             <div class="flex flex-col grow overflow-y-auto">
                 <div class="flex items-start p-5">
-                    <img src="{{ $post->owner->image }}" class="ltr:mr-5 rtl:ml-5 h-10 w-10 rounded-full">
+                    <img src="{{ $post->owner->getImage() }}" class="ltr:mr-5 rtl:ml-5 h-10 w-10 rounded-full">
                     <div>
                         <a href="{{ $post->owner->username }}" class="font-bold">{{ $post->owner->username }}</a>
                         {{ $post->description }}
