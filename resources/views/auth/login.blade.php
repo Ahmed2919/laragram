@@ -28,7 +28,7 @@
         <div class="block mt-4">
             <label for="remember_me" class="inline-flex items-center">
                 <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
-                <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
+                <span class="ltr:ml-2 rtl:mr-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
             </label>
         </div>
 
@@ -38,8 +38,12 @@
                     {{ __('Forgot your password?') }}
                 </a>
             @endif
-
-            <x-primary-button class="ms-3">
+            <a class="inline-flex items-center rtl:mr-3 ltr:ml-3 px-4 py-2 bg-gray-300 border border-tranparent
+                text-xs text-block hover:text-white uppercase ltr:tracking-widset hover:bg-gray-800 active:bg-gray-500
+                focus:outline:none focus:border-gray-900 focus:ring ring-gray-300" href="/register">
+                    {{ __('New User') }}
+                </a>
+            <x-primary-button class="ltr:ml-3 rtl:mr-3">
                 {{ __('Log in') }}
             </x-primary-button>
         </div>

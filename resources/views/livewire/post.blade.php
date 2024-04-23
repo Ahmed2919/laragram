@@ -1,6 +1,6 @@
 <div class="card">
     <div class="card-header">
-        <img src="{{ $post->owner->image }}" class="w-9 h-9 mr-3 rounded-full" />
+        <img src="{{ $post->owner->image }}" class="w-8 h-8 ltr:mr-5 rtl:ml-5 rounded-full" />
         <a href="/{{ $post->owner->username }}" class="font-bold">
             {{ $post->owner->username }}
         </a>
@@ -10,10 +10,10 @@
             <img class="h-auto w-full object-cover" src="{{ asset($post->image) }}">
         </div>
         <div class="p-3 flex flex-row">
-            @livewire('like' , ['post' => $post]); {{--//, ['user' => $user], key($user->id))--}}
+            @livewire('like' , ['post' => $post]) {{--//, ['user' => $user], key($user->id))--}}
 
             <a href="/p/{{$post->slug}}" class="grow">
-                <i class="bx bx-comment text-3xl hover:text-gray-400 cursor-point mr-3"></i>
+                <i class="bx bx-comment text-3xl hover:text-gray-400 cursor-pointer ltr:mr-3 rtl:ml-3"></i>
             </a>
         </div>
         <div class="p-3">

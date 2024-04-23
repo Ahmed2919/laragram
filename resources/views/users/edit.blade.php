@@ -58,7 +58,7 @@
                                 </div>
                             </div>
                         </div>
-                        {{--
+                        
                         <div class="col-span-6 sm:col-span-3">
                             <label for="lang" class="block text-sm font-medium text-gray-700">{{ __('Language') }}</label>
                             <select id="lang" name="lang"
@@ -67,7 +67,7 @@
                                 <option value="en" {{ app()->getLocale() == 'en' ? 'selected' : '' }}>English</option>
                             </select>
                         </div>
-                        --}}
+                        
                     </div>
                     <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
                         <x-button>{{ __('Save') }}</x-button>

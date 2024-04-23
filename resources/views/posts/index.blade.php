@@ -7,7 +7,7 @@
         {{-- Right Side --}}
         <div class="hidden w-[60rem] lg:flex lg:flex-col pt-4">
             <div class="flex flex-row text-sm">
-                <div class="mr-5">
+                <div class="ltr:mr-5 rtl:ml-5">
                     <img src="{{ auth()->user()->getImage() }}" class="border boreder-gray-500 w-12 h-12 mr-3 rounded-full" />
                 </div>
                 <div class="flex flex-col">
@@ -19,11 +19,11 @@
             </div>
 
             <div class="mt-5">
-                <h3 class="text-gray-500 font-bold">{{__('Suggession for you')}}</h3>
+                <h3 class="text-gray-500 font-bold">{{__('Suggestions For You')}}</h3>
                 <ul>
                     @foreach ($suggested_user as $suggested_user)
                         <li class="flex flex-row my-5 text-sm justify-items-center">
-                            <div class="mr-5">
+                            <div class="ltr:mr-5 rtl:ml-5">
                                 <a href="/{{$suggested_user->username}}">
                                     <img src="{{$suggested_user->getImage()}}" class="rounded-full h-9 w-9 border border-gray-500"/>
                                 </a>

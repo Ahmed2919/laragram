@@ -31,7 +31,8 @@ class UpdateUserProfileRequest extends FormRequest
             'image' => 'image',
             'name' => 'required',
             'email' => ['required', 'email'],
-            'password' => ['min:8', 'nullable', 'confirmed']
+            'password' => ['min:8', 'nullable', 'confirmed'],
+            'lang' => 'required',
 
         ];
         // return [

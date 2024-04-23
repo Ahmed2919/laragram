@@ -56,7 +56,7 @@
                 <div class="grow">
                     @foreach ($post->comments as $comment)
                         <div class="flex items-start px-5 py-2">
-                            <img src="{{ $comment->owner->image }}" alt="" class="h-100 ltr:mr-5 rtl:ml-5 w-10 rounded-full">
+                            <img src="{{ $comment->owner->getImage }}" alt="" class="h-100 ltr:mr-5 rtl:ml-5 w-10 rounded-full">
                             <div class="flex flex-col">
                                 <div>
                                     <a href="/{{ $comment->owner->username }}" class="font-bold">{{ $comment->owner->username }}</a>
@@ -74,7 +74,7 @@
                     @livewire('like' , ['post' => $post]) {{--//, ['user' => $user], key($user->id))--}}
         
                     <a class="grow" onclick="document.getElementById('comment_body').focus()">
-                        <i class="bx bx-comment text-3xl hover:text-gray-400 cursor-point mr-3"></i>
+                        <i class="bx bx-comment text-3xl hover:text-gray-400 cursor-pointer ltr:mr-3 rtl:ml-3"></i>
                     </a>
 
                 </div>
